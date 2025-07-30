@@ -36,8 +36,8 @@ if __name__ == "__main__":
             if not args.password:
                 args.password = "password"
 
-                print(f"Port: {args.port} Username: {args.username} Password: {args.password}")
-                run_web_honeypot(args.port, args.username, args.password)
+            print(f"Port: {args.port} Username: {args.username} Password: {args.password}")
+            run_web_honeypot(args.port, args.username, args.password)
 
             pass 
         else:
