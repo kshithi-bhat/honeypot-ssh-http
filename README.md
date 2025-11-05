@@ -31,4 +31,91 @@ It currently supports:
 ---
 
 ## 🏗️ Project Structure
+honeypot-project/
+├── templates/
+│ └── wp-admin.html # Fake WordPress login page
+├── honeypy.py # Main CLI runner
+├── ssh_honeypot.py # SSH honeypot engine
+├── web_honeypot.py # Web honeypot (Flask)
+├── server.key # SSH private key
+├── server.key.pub # SSH public key
+├── audits.log # SSH login attempts
+├── cmd_audits.log # Commands executed in fake shell
+└── http_audits.log # Web login attempts
 
+
+---
+
+## ⚙️ Setup
+
+### 🔧 Install dependencies
+```bash
+pip install flask paramiko
+
+🔑 Generate SSH host key (if needed)
+ssh-keygen -t rsa -b 2048 -f server.key -N ""
+
+🚀 Usage
+▶️ SSH Honeypot
+python honeypy.py --ssh -a 0.0.0.0 -p 2223
+
+
+With custom credentials:
+
+python honeypy.py --ssh -a 0.0.0.0 -p 2223 -u admin -pw secret
+
+🌐 Web Honeypot (Fake WordPress Login)
+python honeypy.py --http -a 0.0.0.0 -p 5000
+
+
+Visit in browser:
+
+http://localhost:5000
+
+📊 Logs & Outputs
+File	Data
+audits.log	SSH login attempts (IP + credentials)
+cmd_audits.log	Commands entered in fake shell
+http_audits.log	Web login attempts & IPs
+📸 Screenshots (Add yours here!)
+
+Replace these with your screenshots
+
+Fake WP Login	SSH Attack
+
+	
+🚧 Future Enhancements
+
+📡 Real-time dashboard (ELK stack / Grafana)
+
+🧠 ML-based attacker behavior tagging
+
+🐳 Docker support
+
+🌍 GeoIP mapping of attackers
+
+📩 Telegram/Slack alerting support
+
+🛡️ Legal & Ethical Disclaimer
+
+This project is for educational and defensive security research only.
+The author is not responsible for misuse.
+
+Use in a controlled lab / VM / private network only.
+
+🤝 Contributing
+
+Pull Requests welcome!
+If you add features like dashboards or Dockerization — please PR 🙌
+
+⭐ Support
+
+If you find this useful:
+
+⭐ Star this repo
+
+🍴 Fork it
+
+🐛 Report issues
+
+🗨️ Share feedback
