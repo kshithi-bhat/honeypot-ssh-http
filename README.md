@@ -1,125 +1,121 @@
-<h1 align="center">🕵️‍♂️ Honeypy — SSH & WordPress Honeypot Toolkit</h1>
-
-<p align="center">
-A Python honeypot to study attacker behavior on SSH & fake WordPress login portals.
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.8%2B-blue" />
-  <img src="https://img.shields.io/badge/SSH-Honeypot-orange" />
-  <img src="https://img.shields.io/badge/Web-Honeypot-green" />
-  <img src="https://img.shields.io/badge/Status-Active-success" />
-</p>
-
----
-
-## 📌 Overview
+<h1 align="center">🕵️‍♂️ Honeypy — SSH & WordPress Honeypot Toolkit</h1> <p align="center"> A Python honeypot to study attacker behavior on SSH & fake WordPress login portals. </p> <p align="center"> <img src="https://img.shields.io/badge/Python-3.8%2B-blue" /> <img src="https://img.shields.io/badge/SSH-Honeypot-orange" /> <img src="https://img.shields.io/badge/Web-Honeypot-green" /> <img src="https://img.shields.io/badge/Status-Active-success" /> </p>
+📌 Overview
 
 Honeypy simulates vulnerable login services to lure attackers and log their activity.
 
-### Features
-| Component | Description |
-|----------|------------|
-🐚 SSH Honeypot | Logs brute-force attempts & fake shell commands  
-🌐 WordPress honeypot | Fake login page built w/ Flask  
-📁 Logging | Credential + command + IP logging  
-⚙️ CLI Args | Choose honeypot type & credentials  
-🧠 Fake shell | Supports common Linux commands  
+Features
+Component	Description
+🐚 SSH Honeypot	Logs brute-force attempts & shell commands
+🌐 WordPress honeypot	Fake login page via Flask
+📁 Logging	Rotating logs (credentials + commands + IP)
+⚙️ CLI	Choose honeypot type & credentials
+🧠 Fake shell	Basic Linux commands emulated
 
-> ⚠️ **Use only inside labs / VMs / isolated networks.**
+⚠️ Only run in isolated labs / VMs.
 
----
-
-## 📂 Directory Structure
-
+📂 Directory Structure
 honeypot/
 ├── honeypy.py
 ├── ssh_honeypot.py
 ├── web_honeypot.py
 ├── templates/
-│ └── wp-admin.html
+│   └── wp-admin.html
 ├── server.key
 ├── server.key.pub
 ├── audits.log
 ├── cmd_audits.log
 └── http_audits.log
 
-
----
-
-## 🛠️ Installation
+🛠️ Installation
 
 Install requirements:
-```bash
+
 pip install flask paramiko
+
+
 Generate SSH server key:
 
-bash
 ssh-keygen -t rsa -b 2048 -f server.key -N ""
+
 🚀 Usage
-▶️ SSH Honeypot
-Start (accepts any credentials):
+SSH Honeypot
 
-bash
-Copy code
+Run (accepts any credentials):
+
 python honeypy.py --ssh -a 0.0.0.0 -p 2223
-Require specific username/password:
 
-bash
+
+Require specific credentials:
+
 python honeypy.py --ssh -a 0.0.0.0 -p 2223 -u admin -pw secret123
-🌐 Web Honeypot
-bash
+
+Web Honeypot
 python honeypy.py --http -a 0.0.0.0 -p 5000
+
 
 Visit:
 
-arduino
 http://localhost:5000
+
 🔐 How to SSH into the honeypot
-Recommended: connect from a VM or another host.
 
-Standard login:
+From another machine / VM:
 
-bash
 ssh -p 2223 testuser@<HONEYPOT_IP>
-Local testing:
 
-bash
+
+Local test:
+
 ssh -p 2223 attacker@localhost
-To skip key warnings:
 
-bash
+
+Skip key prompts:
+
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2223 attacker@<HONEYPOT_IP>
-Once connected you'll see:
 
-ruby
+
+You will see:
+
 corporate-jumpbox2$
+
+
 Supported commands:
-pwd, whoami, ls, cat jumpbox1.conf, exit
-Other commands echo back and get logged.
+
+pwd
+
+whoami
+
+ls
+
+cat jumpbox1.conf
+
+exit
+
+All other commands are echoed & logged.
 
 📊 Logs
 File	Description
-audits.log	SSH login attempts (username & password)
-cmd_audits.log	Commands typed inside honeypot shell
+audits.log	SSH login attempts (username/password/IP)
+cmd_audits.log	Commands executed inside fake shell
 http_audits.log	WordPress login attempts
-
-📸 Demo (Add your screenshots)
+📸 Demo (Add screenshots)
 Fake WP Login	SSH Session
-(screenshot here)	(ssh demo here)
+(put screenshot here)	(put SSH session screenshot here)
+🚧 Roadmap
 
-🚧 Future Enhancements
-Docker support
+Docker deployment
 
-Real-time dashboard (ELK / Kibana)
+ELK dashboard
 
-Geo-IP attacker heatmap
+Geo-IP heatmap
 
 Telegram/Slack alerts
 
 🛡️ Disclaimer
-This tool is for cybersecurity research & education.
-The author is not responsible for illegal use.
+
+This project is for ethical security research & learning.
+Author is not responsible for misuse.
 
 🤝 Contributing
-PRs welcome — star ⭐ the repo if you like it!
+
+PRs welcome — ⭐ star the repo if you find it useful.
