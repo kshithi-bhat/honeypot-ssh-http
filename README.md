@@ -44,8 +44,7 @@ honeypot/
 ├── cmd_audits.log
 └── http_audits.log
 
-yaml
-Copy code
+
 
 ---
 
@@ -57,19 +56,16 @@ pip install flask paramiko
 Generate SSH server key:
 
 bash
-Copy code
 ssh-keygen -t rsa -b 2048 -f server.key -N ""
 🚀 Usage
 ▶️ SSH Honeypot
 Start (accepts any credentials):
 
 bash
-Copy code
 python honeypy.py --ssh -a 0.0.0.0 -p 2223
 Require specific username/password:
 
 bash
-Copy code
 python honeypy.py --ssh -a 0.0.0.0 -p 2223 -u admin -pw secret123
 🌐 Web Honeypot
 bash
@@ -78,7 +74,6 @@ python honeypy.py --http -a 0.0.0.0 -p 5000
 Visit:
 
 arduino
-Copy code
 http://localhost:5000
 🔐 How to SSH into the honeypot
 Recommended: connect from a VM or another host.
@@ -86,12 +81,10 @@ Recommended: connect from a VM or another host.
 Standard login:
 
 bash
-Copy code
 ssh -p 2223 testuser@<HONEYPOT_IP>
 Local testing:
 
 bash
-Copy code
 ssh -p 2223 attacker@localhost
 To skip key warnings:
 
@@ -101,7 +94,6 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2223 attacker
 Once connected you'll see:
 
 ruby
-Copy code
 corporate-jumpbox2$
 Supported commands:
 pwd, whoami, ls, cat jumpbox1.conf, exit
