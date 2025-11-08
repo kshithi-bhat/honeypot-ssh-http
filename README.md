@@ -54,7 +54,7 @@ Install requirements:
 pip install flask paramiko
 Generate SSH server key:
 
-bash
+```bash
 ssh-keygen -t rsa -b 2048 -f server.key -N ""
 🚀 Usage
 ▶️ SSH Honeypot
