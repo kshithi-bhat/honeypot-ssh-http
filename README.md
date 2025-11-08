@@ -17,13 +17,16 @@ A Python honeypot to study attacker behavior on SSH & fake WordPress login porta
 
 Honeypy simulates vulnerable login services to lure attackers and log their activity.
 
-**Features**
-- SSH honeypot with fake shell and command logging.  
-- Web honeypot (fake WordPress login page built with Flask).  
-- Rotating logging (audits + command logs).  
-- Argparse CLI to select mode and credentials.
+### Features
+| Component | Description |
+|----------|------------|
+🐚 SSH Honeypot | Logs brute-force attempts & fake shell commands  
+🌐 WordPress honeypot | Fake login page built w/ Flask  
+📁 Logging | Credential + command + IP logging  
+⚙️ CLI Args | Choose honeypot type & credentials  
+🧠 Fake shell | Supports common Linux commands  
 
-> ⚠️ Use only inside labs / VMs / isolated networks.
+> ⚠️ **Use only inside labs / VMs / isolated networks.**
 
 ---
 
@@ -41,83 +44,91 @@ honeypot/
 ├── cmd_audits.log
 └── http_audits.log
 
+yaml
+Copy code
 
 ---
 
 ## 🛠️ Installation
 
 Install requirements:
+```bash
+pip install flask paramiko
+Generate SSH server key:
 
 bash
-pip install flask paramiko 
-
-Generate SSH server key (run once):
-
+Copy code
 ssh-keygen -t rsa -b 2048 -f server.key -N ""
-
 🚀 Usage
-Start SSH honeypot (accept any credentials)
+▶️ SSH Honeypot
+Start (accepts any credentials):
+
+bash
+Copy code
 python honeypy.py --ssh -a 0.0.0.0 -p 2223
+Require specific username/password:
 
-Start SSH honeypot (require specific credentials)
+bash
+Copy code
 python honeypy.py --ssh -a 0.0.0.0 -p 2223 -u admin -pw secret123
-
-Start Web honeypot (fake WordPress login)
+🌐 Web Honeypot
+bash
+Copy code
 python honeypy.py --http -a 0.0.0.0 -p 5000
+Visit:
 
-
-Open in browser:
-
+arduino
+Copy code
 http://localhost:5000
-
 🔐 How to SSH into the honeypot
+Recommended: connect from a VM or another host.
 
-Recommended: connect from a separate VM or another host.
+Standard login:
 
-From another machine / VM
+bash
+Copy code
 ssh -p 2223 testuser@<HONEYPOT_IP>
+Local testing:
 
-Local test (same host)
+bash
+Copy code
 ssh -p 2223 attacker@localhost
+To skip key warnings:
 
-To skip host-key prompts (optional)
+bash
+Copy code
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2223 attacker@<HONEYPOT_IP>
+Once connected you'll see:
 
-What you will see after login
+ruby
+Copy code
 corporate-jumpbox2$
-
-Built-in/faked commands
-pwd
-whoami
-ls
-cat jumpbox1.conf
-exit
-
-
-Other commands will be echoed back and logged.
+Supported commands:
+pwd, whoami, ls, cat jumpbox1.conf, exit
+Other commands echo back and get logged.
 
 📊 Logs
 File	Description
-audits.log	SSH login attempts (IP + username + password)
-cmd_audits.log	Commands executed in the fake SSH shell
-http_audits.log	Web login attempts & IPs
+audits.log	SSH login attempts (username & password)
+cmd_audits.log	Commands typed inside honeypot shell
+http_audits.log	WordPress login attempts
 
-Logs use RotatingFileHandler — adjust maxBytes / backupCount in the code if you want different rotation.
+📸 Demo (Add your screenshots)
+Fake WP Login	SSH Session
+(screenshot here)	(ssh demo here)
 
-✅ Best Practices
+🚧 Future Enhancements
+Docker support
 
-Run in an isolated VM or lab network.
+Real-time dashboard (ELK / Kibana)
 
-Do not expose to public internet without containment.
+Geo-IP attacker heatmap
 
-Never commit server.key to public repos.
-
-Monitor and rotate logs regularly.
+Telegram/Slack alerts
 
 🛡️ Disclaimer
-
-This project is for educational cybersecurity research only. The author assumes no responsibility for misuse.
+This tool is for cybersecurity research & education.
+The author is not responsible for illegal use.
 
 🤝 Contributing
-
-Contributions welcome — fork, open an issue, or submit a PR.
+PRs welcome
