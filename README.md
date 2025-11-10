@@ -67,9 +67,9 @@ Require specific username/password:
 
 bash
 python honeypy.py --ssh -a 0.0.0.0 -p 2223 -u admin -pw secret123
+
 🌐 Web Honeypot
 bash
-Copy code
 python honeypy.py --http -a 0.0.0.0 -p 5000
 Visit:
 
@@ -89,7 +89,6 @@ ssh -p 2223 attacker@localhost
 To skip key warnings:
 
 bash
-Copy code
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 2223 attacker@<HONEYPOT_IP>
 Once connected you'll see:
 
@@ -105,9 +104,6 @@ audits.log	SSH login attempts (username & password)
 cmd_audits.log	Commands typed inside honeypot shell
 http_audits.log	WordPress login attempts
 
-📸 Demo (Add your screenshots)
-Fake WP Login	SSH Session
-(screenshot here)	(ssh demo here)
 
 🚧 Future Enhancements
 Docker support
